@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using RPG_Maker_WPF.ViewModels;
 
 namespace RPG_Maker_WPF
 {
