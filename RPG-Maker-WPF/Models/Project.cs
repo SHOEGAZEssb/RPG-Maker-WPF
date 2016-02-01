@@ -43,5 +43,13 @@ namespace RPG_Maker_WPF.Models
 		{
 			Name = name;
 		}
+
+		/// <summary>
+		/// Constructor for a new project.
+		/// </summary>
+		public Project()
+		{
+			Database = new Database();
+		}
 	}
 }
