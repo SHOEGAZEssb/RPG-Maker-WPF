@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPG_Maker_WPF.Models.Mapping
 {
@@ -40,6 +36,38 @@ namespace RPG_Maker_WPF.Models.Mapping
 			private set { _displayName = value; }
 		}
 		private string _displayName;
+
+		/// <summary>
+		/// The width of the map.
+		/// </summary>
+		public int MapWidth
+		{
+			get { return _mapWidth; }
+			set
+			{
+				if (value < Statics.MINMAPWIDTH)
+					throw new Exception(String.Format("Map width must be bigger than {0}.", Statics.MINMAPWIDTH));
+				else
+					_mapWidth = value;
+			}
+		}
+		private int _mapWidth;
+
+		/// <summary>
+		/// The height of the map.
+		/// </summary>
+		public int MapHeight
+		{
+			get { return _mapHeight; }
+			set
+			{
+				if (value < Statics.MINMAPHEIGHT)
+					throw new Exception(String.Format("Map width must be bigger than {0}.", Statics.MINMAPHEIGHT));
+				else
+					_mapHeight = value;
+			}
+		}
+		private int _mapHeight;
 
 		#endregion
 	}

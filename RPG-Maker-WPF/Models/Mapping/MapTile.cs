@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RPG_Maker_WPF.Models.Mapping
+﻿namespace RPG_Maker_WPF.Models.Mapping
 {
 	class MapTile
 	{
 		#region Properties
 
+		/// <summary>
+		/// The <see cref="LowerTile"/> of this MapTile.
+		/// </summary>
 		public LowerTile LowerTile
 		{
 			get { return _lowerTile; }
@@ -17,6 +14,9 @@ namespace RPG_Maker_WPF.Models.Mapping
 		}
 		private LowerTile _lowerTile;
 
+		/// <summary>
+		/// The <see cref="UpperTile"/> of this MapTile.
+		/// </summary>
 		public UpperTile UpperTile
 		{
 			get { return _upperTile; }
@@ -24,6 +24,9 @@ namespace RPG_Maker_WPF.Models.Mapping
 		}
 		private UpperTile _upperTile;
 
+		/// <summary>
+		/// The <see cref="Event"/> of this MapTile.
+		/// </summary>
 		public Event Event
 		{
 			get { return _event; }

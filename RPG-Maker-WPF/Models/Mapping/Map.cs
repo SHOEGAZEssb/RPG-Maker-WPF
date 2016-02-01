@@ -14,6 +14,16 @@ namespace RPG_Maker_WPF.Models.Mapping
 		#region Properties
 
 		/// <summary>
+		/// The tile data of this map.
+		/// </summary>
+		public MapTile[,] MapData
+		{
+			get { return _mapData; }
+			private set { _mapData = value; }
+		}
+		private MapTile[,] _mapData;
+
+		/// <summary>
 		/// The <see cref="MapMetaData"/> of this map.
 		/// </summary>
 		public MapMetaData MetaData
@@ -32,6 +42,7 @@ namespace RPG_Maker_WPF.Models.Mapping
 		public Map(MapMetaData metaData)
 		{
 			MetaData = metaData;
+			MapData = new MapTile[MetaData.MapWidth, MetaData.MapHeight];
 		}
 	}
 }
