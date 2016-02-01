@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPG_Maker_WPF.Models
+namespace RPG_Maker_WPF.Models.Mapping
 {
 	/// <summary>
 	/// Represents certain meta informations about a <see cref="Map"/>.
