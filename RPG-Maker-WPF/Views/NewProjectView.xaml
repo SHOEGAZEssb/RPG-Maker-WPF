@@ -3,10 +3,72 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cal="http://www.caliburnproject.org"
         xmlns:local="clr-namespace:RPG_Maker_WPF.Views"
         mc:Ignorable="d"
-        Title="NewProjectView" Height="300" Width="300">
-    <Grid>
-        
+        Title="NewProjectView" Height="175" Width="300" ResizeMode="CanMinimize">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="5"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="5"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="5"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="5"/>
+      <ColumnDefinition Width="0.65*"/>
+      <ColumnDefinition Width="5"/>
+      <ColumnDefinition Width="0.5*"/>
+      <ColumnDefinition Width="5"/>
+      <ColumnDefinition Width="0.15*"/>
+      <ColumnDefinition Width="5"/>
+    </Grid.ColumnDefinitions>
+
+    <Label Grid.Row="1" Grid.Column="1" Content="Project Name"/>
+    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ProjectName}"/>
+
+    <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Content="Directory Name"/>
+    <TextBox Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding DirectoryName}"/>
+
+    <Label Grid.Row="4" Grid.Column="1" Content="Save Directory"/>
+    <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding SaveDirectory}"/>
+    <Button Grid.Row="5" Grid.Column="5" Content="...">
+      <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Click">
+          <cal:ActionMessage MethodName="SelectSaveDirectory"/>
+        </i:EventTrigger>
+      </i:Interaction.Triggers>
+    </Button>
+
+    <Grid Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="5"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+
+      <Button Grid.Column="0" Content="Create" IsEnabled="{Binding CanCreate}">
+        <i:Interaction.Triggers>
+          <i:EventTrigger EventName="Click">
+            <cal:ActionMessage MethodName="CreateNewProject"/>
+          </i:EventTrigger>
+        </i:Interaction.Triggers>
+      </Button>
+      <Button Grid.Column="2" Content="Cancel">
+        <i:Interaction.Triggers>
+          <i:EventTrigger EventName="Click">
+            <cal:ActionMessage MethodName="Cancel">
+              <cal:Parameter Value="$source"/>
+            </cal:ActionMessage>
+          </i:EventTrigger>
+        </i:Interaction.Triggers>
+      </Button>
     </Grid>
+
+  </Grid>
 </Window>
