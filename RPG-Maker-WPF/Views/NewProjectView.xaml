@@ -7,7 +7,7 @@
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:local="clr-namespace:RPG_Maker_WPF.Views"
         mc:Ignorable="d"
-        Title="NewProjectView" Height="175" Width="300" ResizeMode="CanMinimize">
+        Title="Create new project..." Height="175" Width="500" ResizeMode="CanMinimize">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="5"/>
@@ -30,10 +30,10 @@
     </Grid.ColumnDefinitions>
 
     <Label Grid.Row="1" Grid.Column="1" Content="Project Name"/>
-    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ProjectName}"/>
+    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"/>
 
     <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Content="Directory Name"/>
-    <TextBox Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding DirectoryName}"/>
+    <TextBox Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding DirectoryName, UpdateSourceTrigger=PropertyChanged}"/>
 
     <Label Grid.Row="4" Grid.Column="1" Content="Save Directory"/>
     <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding SaveDirectory}"/>
