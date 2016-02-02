@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace RPG_Maker_WPF.Models.Mapping
 {
 	/// <summary>
 	/// Represents a single map in a game.
 	/// </summary>
-	class Map
+	public class Map
 	{
 		#region Properties
 

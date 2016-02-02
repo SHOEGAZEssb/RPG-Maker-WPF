@@ -29,7 +29,14 @@
             </i:EventTrigger>
           </i:Interaction.Triggers>
         </MenuItem>
-        <MenuItem Header="Close Project..." DataContext="{Binding ProjectVM}">
+        <MenuItem Header="Save Project..." IsEnabled="{Binding CanSaveProject}"  DataContext="{Binding ProjectVM}">
+          <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+              <cal:ActionMessage MethodName="SaveProject"/>
+            </i:EventTrigger>
+          </i:Interaction.Triggers>
+        </MenuItem>
+        <MenuItem Header="Close Project..." IsEnabled="{Binding CanCloseProject}"  DataContext="{Binding ProjectVM}">
           <i:Interaction.Triggers>
             <i:EventTrigger EventName="Click">
               <cal:ActionMessage MethodName="CloseProject"/>

@@ -1,6 +1,6 @@
 ﻿namespace RPG_Maker_WPF.Models.Mapping
 {
-	class MapTile
+	public class MapTile
 	{
 		#region Properties
 

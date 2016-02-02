@@ -10,7 +10,7 @@ namespace RPG_Maker_WPF.Models.Mapping
 	/// Represents a tile using the lower slot
 	/// of a <see cref="MapTile"/>.
 	/// </summary>
-	class LowerTile : Tile
+	public class LowerTile : Tile
 	{
 	}
 }

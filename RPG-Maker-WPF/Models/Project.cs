@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RPG_Maker_WPF.Models.Mapping;
+using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace RPG_Maker_WPF.Models
@@ -60,6 +62,16 @@ namespace RPG_Maker_WPF.Models
 		}
 		private string _path;
 
+		/// <summary>
+		/// List of maps (not submaps) of this project.
+		/// </summary>
+		public List<Map> Maps
+		{
+			get { return _maps; }
+			private set { _maps = value; }
+		}
+		private List<Map> _maps;
+
 		#endregion Properties
 
 		/// <summary>
@@ -72,6 +84,7 @@ namespace RPG_Maker_WPF.Models
 			Name = name;
 			Database = new Database();
 			_path = path;
+			Maps = new List<Map>();
 		}
 
 		/// <summary>
@@ -80,6 +93,7 @@ namespace RPG_Maker_WPF.Models
 		public Project()
 		{
 			Database = new Database();
+			Maps = new List<Map>();
 		}
 	}
 }

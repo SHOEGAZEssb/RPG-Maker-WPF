@@ -10,7 +10,7 @@ namespace RPG_Maker_WPF.Models.Mapping
 	/// Represents an interactive event which is present
 	/// on a <see cref="MapTile"/>.
 	/// </summary>
-	class Event
+	public class Event
 	{
 	}
 }

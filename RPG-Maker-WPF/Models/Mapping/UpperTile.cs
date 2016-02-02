@@ -10,7 +10,7 @@ namespace RPG_Maker_WPF.Models.Mapping
 	/// Represents a tile using the upper slot
 	/// of a <see cref="MapTile"/>.
 	/// </summary>
-	class UpperTile : Tile
+	public class UpperTile : Tile
 	{
 	}
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Xml;
+using System;
 
 namespace RPG_Maker_WPF.ViewModels
 {
@@ -52,16 +53,27 @@ namespace RPG_Maker_WPF.ViewModels
 				LoadProject(Properties.Settings.Default.LastOpenedProject);
 		}
 
+		/// <summary>
+		/// Shows a <see cref="NewProjectView"/> to
+		/// create a new <see cref="Project"/>.
+		/// </summary>
 		public void ShowNewProjectDialog()
 		{
 			NewProjectView npv = new NewProjectView();
 			if (npv.ShowDialog() == true)
 			{
-				// todo: check if current loaded project needs saving and close it.
+				CloseProject();
 				NewProjectViewModel vm = npv.DataContext as NewProjectViewModel;
 				CurrentProject = new Project(vm.ProjectName, vm.FullPath);
 				CreateFolderStructure();
+
+				ShowNewMapDialog();
 			}
+		}
+
+		public void ShowNewMapDialog()
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -74,6 +86,7 @@ namespace RPG_Maker_WPF.ViewModels
 			Directory.CreateDirectory(CurrentProject.Path);
 
 			// todo: create all needed data folders (maps, sounds etc...)
+			Directory.CreateDirectory(CurrentProject.Path + "\\Maps");
 
 			// create project file
 			XmlSerializer serializer = new XmlSerializer(typeof(Project));

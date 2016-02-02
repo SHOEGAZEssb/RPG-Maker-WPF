@@ -5,7 +5,7 @@ namespace RPG_Maker_WPF.Models.Mapping
 	/// <summary>
 	/// Represents certain meta informations about a <see cref="Map"/>.
 	/// </summary>
-	class MapMetaData
+	public class MapMetaData
 	{
 		#region Properties
 
