@@ -1,26 +1,15 @@
 ﻿using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace RPG_Maker_WPF.Models
 {
 	/// <summary>
 	/// Represents the current loaded project.
 	/// </summary>
-	class Project
+	public class Project
 	{
-		#region Member
-
-		/// <summary>
-		/// Path used for file creation.
-		/// </summary>
-		/// <remarks>
-		/// Only use relative paths for file creation.
-		/// _path will only be set once on creation or load
-		/// of the project to determine the relative paths.
-		/// </remarks>
-		private string _path;
-
-		#endregion Member
-
 		#region Properties
 
 		/// <summary>
@@ -43,12 +32,34 @@ namespace RPG_Maker_WPF.Models
 		/// <summary>
 		/// Reference to this projects <see cref="Database"/>.
 		/// </summary>
+		[XmlIgnore]
 		public Database Database
 		{
 			get { return _database; }
 			private set { _database = value; }
 		}
 		private Database _database;
+
+		/// <summary>
+		/// Path used for file creation.
+		/// </summary>
+		/// <remarks>
+		/// Only use relative paths for file creation.
+		/// _path will only be set once on creation or load
+		/// of the project to determine the relative paths.
+		/// </remarks>
+		public string Path
+		{
+			get { return _path; }
+			set
+			{
+				if (value.Length == 0)
+					throw new Exception("Path can not be empty.");
+				else
+					_path = value;
+			}
+		}
+		private string _path;
 
 		#endregion Properties
 
@@ -62,6 +73,30 @@ namespace RPG_Maker_WPF.Models
 			Name = name;
 			Database = new Database();
 			_path = path;
+			CreateFolderStructure();
+		}
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		public Project()
+		{
+			Database = new Database();
+		}
+
+		private void CreateFolderStructure()
+		{
+			// create main project folder
+			Directory.CreateDirectory(_path);
+
+			// todo: create all needed data folders (maps, sounds etc...)
+
+			// create project file
+			XmlSerializer serializer = new XmlSerializer(typeof(Project));
+			string path = _path + "\\" + Name + ".rpgwpf";
+			FileStream file = File.Create(path);
+			serializer.Serialize(file, this);
+			file.Close();
 		}
 	}
 }

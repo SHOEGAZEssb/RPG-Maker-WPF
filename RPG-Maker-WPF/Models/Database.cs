@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Represents a database with all the info about a game.
 	/// </summary>
-	class Database
+	public class Database
 	{
 	}
 }

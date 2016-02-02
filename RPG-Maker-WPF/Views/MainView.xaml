@@ -22,8 +22,20 @@
             </i:EventTrigger>
           </i:Interaction.Triggers>
         </MenuItem>
-        <MenuItem Header="Load Project..."/>
-        <MenuItem Header="Close Project..."/>
+        <MenuItem Header="Load Project..." DataContext="{Binding ProjectVM}">
+          <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+              <cal:ActionMessage MethodName="LoadProject"/>
+            </i:EventTrigger>
+          </i:Interaction.Triggers>
+        </MenuItem>
+        <MenuItem Header="Close Project..." DataContext="{Binding ProjectVM}">
+          <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+              <cal:ActionMessage MethodName="CloseProject"/>
+            </i:EventTrigger>
+          </i:Interaction.Triggers>
+        </MenuItem>
       </MenuItem>
     </Menu>
   </Grid>

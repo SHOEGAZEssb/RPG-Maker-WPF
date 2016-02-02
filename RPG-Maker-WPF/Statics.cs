@@ -14,5 +14,10 @@
 		/// The minimum map height.
 		/// </summary>
 		public const int MINMAPHEIGHT = 20;
+
+		/// <summary>
+		/// The file extension of project files.
+		/// </summary>
+		public const string PROJECTFILEEXTENSION = ".rpgwpf";
 	}
 }
