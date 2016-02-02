@@ -33,6 +33,18 @@ namespace RPG_Maker_WPF.Models.Mapping
 		}
 		private MapMetaData _metaData;
 
+		/// <summary>
+		/// List of submaps.
+		/// This will be used for the tree view
+		/// of the maps of the project.
+		/// </summary>
+		public List<Map> Submaps
+		{
+			get { return _subMaps; }
+			private set { _subMaps = value; }
+		}
+		private List<Map> _subMaps;
+
 		#endregion Properties
 
 		/// <summary>
@@ -43,6 +55,7 @@ namespace RPG_Maker_WPF.Models.Mapping
 		{
 			MetaData = metaData;
 			MapData = new MapTile[MetaData.MapWidth, MetaData.MapHeight];
+			Submaps = new List<Map>();
 		}
 	}
 }
