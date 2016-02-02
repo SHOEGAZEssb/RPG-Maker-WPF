@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace RPG_Maker_WPF.Models
@@ -48,6 +46,7 @@ namespace RPG_Maker_WPF.Models
 		/// _path will only be set once on creation or load
 		/// of the project to determine the relative paths.
 		/// </remarks>
+		[XmlIgnore]
 		public string Path
 		{
 			get { return _path; }
@@ -73,7 +72,6 @@ namespace RPG_Maker_WPF.Models
 			Name = name;
 			Database = new Database();
 			_path = path;
-			CreateFolderStructure();
 		}
 
 		/// <summary>
@@ -82,21 +80,6 @@ namespace RPG_Maker_WPF.Models
 		public Project()
 		{
 			Database = new Database();
-		}
-
-		private void CreateFolderStructure()
-		{
-			// create main project folder
-			Directory.CreateDirectory(_path);
-
-			// todo: create all needed data folders (maps, sounds etc...)
-
-			// create project file
-			XmlSerializer serializer = new XmlSerializer(typeof(Project));
-			string path = _path + "\\" + Name + ".rpgwpf";
-			FileStream file = File.Create(path);
-			serializer.Serialize(file, this);
-			file.Close();
 		}
 	}
 }

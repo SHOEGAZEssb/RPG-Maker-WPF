@@ -60,7 +60,27 @@ namespace RPG_Maker_WPF.ViewModels
 				// todo: check if current loaded project needs saving and close it.
 				NewProjectViewModel vm = npv.DataContext as NewProjectViewModel;
 				CurrentProject = new Project(vm.ProjectName, vm.FullPath);
+				CreateFolderStructure();
 			}
+		}
+
+		/// <summary>
+		/// Creates the folder structure for a newly
+		/// created <see cref="Project"/>.
+		/// </summary>
+		private void CreateFolderStructure()
+		{
+			// create main project folder
+			Directory.CreateDirectory(CurrentProject.Path);
+
+			// todo: create all needed data folders (maps, sounds etc...)
+
+			// create project file
+			XmlSerializer serializer = new XmlSerializer(typeof(Project));
+			string path = CurrentProject.Path + "\\" + CurrentProject.Name + Statics.PROJECTFILEEXTENSION;
+			FileStream file = File.Create(path);
+			serializer.Serialize(file, CurrentProject);
+			file.Close();
 		}
 
 		/// <summary>
