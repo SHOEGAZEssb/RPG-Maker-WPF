@@ -1,31 +1,37 @@
 ﻿using Caliburn.Micro;
-using RPG_Maker_WPF.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RPG_Maker_WPF.Views;
 
 namespace RPG_Maker_WPF.ViewModels
 {
+	/// <summary>
+	/// ViewModel of the <see cref="MainView"/>
+	/// </summary>
 	class MainViewModel : PropertyChangedBase
 	{
 		#region Properties
 
 		/// <summary>
-		/// The currently loaded <see cref="Project"/>.
+		/// The ProjectViewModel.
 		/// </summary>
-		public Project CurrentProject
+		public ProjectViewModel ProjectVM
 		{
-			get { return _currentProject; }
+			get { return _projectVM; }
 			private set
 			{
-				_currentProject = value;
-				NotifyOfPropertyChange(() => CurrentProject);
+				_projectVM = value;
+				NotifyOfPropertyChange(() => ProjectVM);
 			}
 		}
-		private Project _currentProject;
+		private ProjectViewModel _projectVM;
 
-		#endregion Properties
+		#endregion
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		public MainViewModel()
+		{
+			ProjectVM = new ProjectViewModel();
+		}
 	}
 }

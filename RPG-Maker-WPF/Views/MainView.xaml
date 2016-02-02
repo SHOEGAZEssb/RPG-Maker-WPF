@@ -3,10 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cal="http://www.caliburnproject.org"
         xmlns:local="clr-namespace:RPG_Maker_WPF"
         mc:Ignorable="d"
         Title="MainView" Height="350" Width="525">
-    <Grid>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
 
-    </Grid>
+    <Menu Grid.Row="0">
+      <MenuItem Header="File">
+        <MenuItem Header="New Project..." DataContext="{Binding ProjectVM}">
+          <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+              <cal:ActionMessage MethodName="ShowNewProjectDialog"/>
+            </i:EventTrigger>
+          </i:Interaction.Triggers>
+        </MenuItem>
+        <MenuItem Header="Load Project..."/>
+        <MenuItem Header="Close Project..."/>
+      </MenuItem>
+    </Menu>
+  </Grid>
 </Window>

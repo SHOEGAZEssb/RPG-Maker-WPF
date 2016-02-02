@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using RPG_Maker_WPF.ViewModels;
+using System.Windows;
 
 namespace RPG_Maker_WPF.Views
 {
@@ -13,6 +14,7 @@ namespace RPG_Maker_WPF.Views
 		public NewProjectView()
 		{
 			InitializeComponent();
+			DataContext = new NewProjectViewModel();
 		}
 	}
 }
