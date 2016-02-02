@@ -55,7 +55,9 @@
       <Button Grid.Column="0" Content="Create" IsEnabled="{Binding CanCreate}">
         <i:Interaction.Triggers>
           <i:EventTrigger EventName="Click">
-            <cal:ActionMessage MethodName="CreateNewProject"/>
+            <cal:ActionMessage MethodName="CreateNewProject">
+              <cal:Parameter Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+            </cal:ActionMessage>
           </i:EventTrigger>
         </i:Interaction.Triggers>
       </Button>
@@ -63,7 +65,7 @@
         <i:Interaction.Triggers>
           <i:EventTrigger EventName="Click">
             <cal:ActionMessage MethodName="Cancel">
-              <cal:Parameter Value="$source"/>
+              <cal:Parameter Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
             </cal:ActionMessage>
           </i:EventTrigger>
         </i:Interaction.Triggers>

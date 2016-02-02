@@ -37,8 +37,9 @@ namespace RPG_Maker_WPF.ViewModels
 			NewProjectView npv = new NewProjectView();
 			if (npv.ShowDialog() == true)
 			{
-				// todo: check if current loaded project needs saving
-				//CurrentProject = new Project(npv.Pro)
+				// todo: check if current loaded project needs saving and close it.
+				NewProjectViewModel vm = npv.DataContext as NewProjectViewModel;
+				CurrentProject = new Project(vm.ProjectName, vm.FullPath);
 			}
 		}
 	}

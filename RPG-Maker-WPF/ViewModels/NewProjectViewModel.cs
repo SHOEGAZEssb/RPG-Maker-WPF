@@ -87,6 +87,14 @@ namespace RPG_Maker_WPF.ViewModels
 			get { return ProjectName != "" && DirectoryName != ""; }
 		}
 
+		/// <summary>
+		/// Returns the full path to the project.
+		/// </summary>
+		public string FullPath
+		{
+			get { return SaveDirectory + "\\" + DirectoryName; }
+		}
+
 		#endregion Read-Only Properties
 
 		#endregion Properties
@@ -98,7 +106,7 @@ namespace RPG_Maker_WPF.ViewModels
 		{
 			ProjectName = "SampleProject";
 			DirectoryName = "SampleProject";
-			SaveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SampleProject";
+			SaveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 		}
 
 		/// <summary>
@@ -119,7 +127,7 @@ namespace RPG_Maker_WPF.ViewModels
 		/// <param name="view">Reference to the calling <see cref="NewProjectView"/>,
 		/// used to set its DialogResult to true.
 		/// </param>
-		public void Create(NewProjectView view)
+		public void CreateNewProject(NewProjectView view)
 		{
 			view.DialogResult = true;
 			view.Close();

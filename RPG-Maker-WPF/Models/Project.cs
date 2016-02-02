@@ -7,6 +7,20 @@ namespace RPG_Maker_WPF.Models
 	/// </summary>
 	class Project
 	{
+		#region Member
+
+		/// <summary>
+		/// Path used for file creation.
+		/// </summary>
+		/// <remarks>
+		/// Only use relative paths for file creation.
+		/// _path will only be set once on creation or load
+		/// of the project to determine the relative paths.
+		/// </remarks>
+		private string _path;
+
+		#endregion Member
+
 		#region Properties
 
 		/// <summary>
@@ -26,6 +40,9 @@ namespace RPG_Maker_WPF.Models
 		}
 		private string _name;
 
+		/// <summary>
+		/// Reference to this projects <see cref="Database"/>.
+		/// </summary>
 		public Database Database
 		{
 			get { return _database; }
@@ -39,17 +56,12 @@ namespace RPG_Maker_WPF.Models
 		/// Constructor.
 		/// </summary>
 		/// <param name="name">The name of the project to create.</param>
-		public Project(string name)
+		/// <param name="path">Path where the project will be created.</param>
+		public Project(string name, string path)
 		{
 			Name = name;
-		}
-
-		/// <summary>
-		/// Constructor for a new project.
-		/// </summary>
-		public Project()
-		{
 			Database = new Database();
+			_path = path;
 		}
 	}
 }
