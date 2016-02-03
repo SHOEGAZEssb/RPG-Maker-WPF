@@ -1,14 +1,6 @@
 ﻿using Caliburn.Micro;
 using RPG_Maker_WPF.Models;
 using RPG_Maker_WPF.Views.DatabaseViews;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace RPG_Maker_WPF.ViewModels
 {
@@ -84,8 +76,7 @@ namespace RPG_Maker_WPF.ViewModels
 
 		public DatabaseViewModel()
 		{
-			ProjectDatabase.Actors.Add(new Actor() { Name = "Test", SecondName = "Testi", InitialLevel = 1, MaxLevel = 44, Description = "Bla" });
-			ProjectDatabase.SaveData();
+
 		}
 	}
 }

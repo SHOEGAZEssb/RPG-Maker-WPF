@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="Polenter.SharpSerializer">
+      <HintPath>Libs\Polenter.SharpSerializer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />

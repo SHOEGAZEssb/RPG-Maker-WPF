@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Xml;
 using System;
+using Polenter.Serialization;
 
 namespace RPG_Maker_WPF.ViewModels
 {
@@ -83,11 +84,9 @@ namespace RPG_Maker_WPF.ViewModels
 			Directory.CreateDirectory(CurrentProject.Path + "\\Data");
 
 			// create project file
-			XmlSerializer serializer = new XmlSerializer(typeof(Project));
+			SharpSerializer serializer = new SharpSerializer();
 			string path = CurrentProject.Path + "\\" + CurrentProject.Name + Statics.PROJECTFILEEXTENSION;
-			FileStream file = File.Create(path);
-			serializer.Serialize(file, CurrentProject);
-			file.Close();
+			serializer.Serialize(CurrentProject, path);
 		}
 
 		/// <summary>
@@ -96,11 +95,8 @@ namespace RPG_Maker_WPF.ViewModels
 		/// <param name="path">The project file to load.</param>
 		private void LoadProject(string path)
 		{
-			XmlSerializer serializer = new XmlSerializer(typeof(Project));
-			FileStream fs = new FileStream(path, FileMode.Open);
-			XmlReader reader = XmlReader.Create(fs);
-
-			CurrentProject = (Project)serializer.Deserialize(reader);
+			SharpSerializer serializer = new SharpSerializer();
+			CurrentProject = (Project)serializer.Deserialize(path);
 			CurrentProject.Path = Path.GetDirectoryName(path);
 			CurrentProject.Database.LoadData();
 			Properties.Settings.Default.LastOpenedProject = path;

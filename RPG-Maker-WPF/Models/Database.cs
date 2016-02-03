@@ -1,9 +1,7 @@
 ﻿using RPG_Maker_WPF.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
+using Polenter.Serialization;
 
 namespace RPG_Maker_WPF.Models
 {
@@ -14,7 +12,6 @@ namespace RPG_Maker_WPF.Models
 	{
 		#region Properties
 
-		[XmlArrayItem("ListOfActors")]
 		public List<Actor> Actors
 		{
 			get { return _actors; }
@@ -24,29 +21,32 @@ namespace RPG_Maker_WPF.Models
 
 		#endregion properties
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public Database()
 		{
 			Actors = new List<Actor>();
 		}
 
+		/// <summary>
+		/// Loads database data from xmls.
+		/// </summary>
 		public void LoadData()
 		{
-			Type[] knownTypes = new Type[] { typeof(Actor) };
-			XmlSerializer serializer = new XmlSerializer(typeof(List<Actor>), knownTypes);
-			FileStream fs = new FileStream(ProjectViewModel.CurrentProject.Path + "\\Data\\ActorData.rpgwpfd", FileMode.Open);
-			XmlReader reader = XmlReader.Create(fs);
-
-			Actors = (List<Actor>)serializer.Deserialize(fs);
+			SharpSerializer serializer = new SharpSerializer();
+			string path = ProjectViewModel.CurrentProject.Path + "\\Data\\ActorData.rpgwpfd";
+			Actors = (List<Actor>)serializer.Deserialize(path);
 		}
 
+		/// <summary>
+		/// Saves the current database data to xmls.
+		/// </summary>
 		public void SaveData()
 		{
-			Type[] knownTypes = new Type[] { typeof(Actor) };
-			XmlSerializer serializer = new XmlSerializer(typeof(List<Actor>), knownTypes);
+			SharpSerializer serializer = new SharpSerializer();
 			string path = ProjectViewModel.CurrentProject.Path + "\\Data\\ActorData.rpgwpfd";
-			FileStream file = File.Create(path);
-			serializer.Serialize(file, Actors);
-			file.Close();
+			serializer.Serialize(Actors, path);
 		}
 	}
 }

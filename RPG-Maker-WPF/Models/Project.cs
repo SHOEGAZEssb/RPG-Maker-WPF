@@ -1,4 +1,5 @@
-﻿using RPG_Maker_WPF.Models.Mapping;
+﻿using Polenter.Serialization;
+using RPG_Maker_WPF.Models.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -32,7 +33,7 @@ namespace RPG_Maker_WPF.Models
 		/// <summary>
 		/// Reference to this projects <see cref="Database"/>.
 		/// </summary>
-		[XmlIgnore]
+		[ExcludeFromSerialization]
 		public Database Database
 		{
 			get { return _database; }
@@ -48,7 +49,7 @@ namespace RPG_Maker_WPF.Models
 		/// _path will only be set once on creation or load
 		/// of the project to determine the relative paths.
 		/// </remarks>
-		[XmlIgnore]
+		[ExcludeFromSerialization]
 		public string Path
 		{
 			get { return _path; }
@@ -65,7 +66,7 @@ namespace RPG_Maker_WPF.Models
 		/// <summary>
 		/// List of maps (not submaps) of this project.
 		/// </summary>
-		[XmlIgnore]
+		[ExcludeFromSerialization]
 		public List<Map> Maps
 		{
 			get { return _maps; }

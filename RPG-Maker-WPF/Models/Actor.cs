@@ -1,11 +1,8 @@
-﻿using System.Xml.Serialization;
-
-namespace RPG_Maker_WPF.Models
+﻿namespace RPG_Maker_WPF.Models
 {
 	/// <summary>
 	/// Represents a (theoretically) playable character.
 	/// </summary>
-	[XmlRoot(ElementName = "Actor")]
 	public class Actor
 	{
 		#region Properties
@@ -30,6 +27,9 @@ namespace RPG_Maker_WPF.Models
 		}
 		private string _secondName;
 
+		/// <summary>
+		/// The description of this actor.
+		/// </summary>
 		public string Description
 		{
 			get { return _description; }
