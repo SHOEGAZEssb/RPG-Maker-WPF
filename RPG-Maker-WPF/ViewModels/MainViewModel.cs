@@ -33,5 +33,11 @@ namespace RPG_Maker_WPF.ViewModels
 		{
 			ProjectVM = new ProjectViewModel();
 		}
+
+		public void ExitProgram()
+		{
+			ProjectVM.CloseProject();
+			App.Current.Shutdown();
+		}
 	}
 }

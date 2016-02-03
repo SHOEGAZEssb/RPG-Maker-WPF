@@ -43,6 +43,14 @@
             </i:EventTrigger>
           </i:Interaction.Triggers>
         </MenuItem>
+        <Separator/>
+        <MenuItem Header="Exit">
+          <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+              <cal:ActionMessage MethodName="ExitProgram"/>
+            </i:EventTrigger>
+          </i:Interaction.Triggers>
+        </MenuItem>
       </MenuItem>
     </Menu>
   </Grid>
