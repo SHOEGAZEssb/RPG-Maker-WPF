@@ -17,7 +17,7 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding ProjectDatabase.Actors}" SelectedItem="{Binding SelectedActor}"/>
+    <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Actors}" SelectedItem="{Binding SelectedActor}"/>
 
     <GroupBox Header="Basic Settings" Grid.Column="1" Grid.Row="1">
       <Grid>

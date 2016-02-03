@@ -1,12 +1,18 @@
 ﻿using Caliburn.Micro;
 using RPG_Maker_WPF.Models;
 using RPG_Maker_WPF.Views.DatabaseViews;
+using System.Collections.Generic;
 
 namespace RPG_Maker_WPF.ViewModels
 {
 	class DatabaseViewModel : PropertyChangedBase
 	{
 		#region Properties
+
+		public List<Actor> Actors
+		{
+			get { return ProjectDatabase.Actors; }
+		}
 
 		/// <summary>
 		/// Currently selected <see cref="Actor"/> in the
@@ -63,20 +69,20 @@ namespace RPG_Maker_WPF.ViewModels
 			get { return ProjectViewModel.CurrentProject.Database; }
 		}
 
-		public void ShowDatabaseDialog()
-		{
-			DatabaseView dbv = new DatabaseView();
-			dbv.DataContext = this;
-			dbv.ShowDialog();
-		}
-
 		#endregion
 
 		#endregion
 
 		public DatabaseViewModel()
 		{
+			SelectedActor = Actors[0];
+		}
 
+		public void ShowDatabaseDialog()
+		{
+			DatabaseView dbv = new DatabaseView();
+			dbv.DataContext = this;
+			dbv.ShowDialog();
 		}
 	}
 }
