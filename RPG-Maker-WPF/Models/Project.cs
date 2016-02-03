@@ -65,6 +65,7 @@ namespace RPG_Maker_WPF.Models
 		/// <summary>
 		/// List of maps (not submaps) of this project.
 		/// </summary>
+		[XmlIgnore]
 		public List<Map> Maps
 		{
 			get { return _maps; }

@@ -66,14 +66,7 @@ namespace RPG_Maker_WPF.ViewModels
 				NewProjectViewModel vm = npv.DataContext as NewProjectViewModel;
 				CurrentProject = new Project(vm.ProjectName, vm.FullPath);
 				CreateFolderStructure();
-
-				ShowNewMapDialog();
 			}
-		}
-
-		public void ShowNewMapDialog()
-		{
-			throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -87,6 +80,7 @@ namespace RPG_Maker_WPF.ViewModels
 
 			// todo: create all needed data folders (maps, sounds etc...)
 			Directory.CreateDirectory(CurrentProject.Path + "\\Maps");
+			Directory.CreateDirectory(CurrentProject.Path + "\\Data");
 
 			// create project file
 			XmlSerializer serializer = new XmlSerializer(typeof(Project));
@@ -108,6 +102,9 @@ namespace RPG_Maker_WPF.ViewModels
 
 			CurrentProject = (Project)serializer.Deserialize(reader);
 			CurrentProject.Path = Path.GetDirectoryName(path);
+			CurrentProject.Database.LoadData();
+			Properties.Settings.Default.LastOpenedProject = path;
+			Properties.Settings.Default.Save();
 		}
 
 		/// <summary>
