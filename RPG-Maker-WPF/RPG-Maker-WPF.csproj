@@ -68,8 +68,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Actor.cs" />
+    <Compile Include="ViewModels\DatabaseViewModel.cs" />
     <Compile Include="ViewModels\NewProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="Views\DatabaseView.xaml.cs">
+      <DependentUpon>DatabaseView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MapEditorView.xaml.cs">
       <DependentUpon>MapEditorView.xaml</DependentUpon>
     </Compile>
@@ -79,6 +84,10 @@
     <Compile Include="Views\TileSetSelectorView.xaml.cs">
       <DependentUpon>TileSetSelectorView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\DatabaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
