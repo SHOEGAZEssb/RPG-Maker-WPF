@@ -24,6 +24,17 @@ namespace RPG_Maker_WPF.ViewModels
 		}
 		private ProjectViewModel _projectVM;
 
+		public DatabaseViewModel DatabaseVM
+		{
+			get { return _databaseVM; }
+			private set
+			{
+				_databaseVM = value;
+				NotifyOfPropertyChange(() => DatabaseVM);
+			}
+		}
+		private DatabaseViewModel _databaseVM;
+
 		#endregion
 
 		/// <summary>
@@ -32,6 +43,7 @@ namespace RPG_Maker_WPF.ViewModels
 		public MainViewModel()
 		{
 			ProjectVM = new ProjectViewModel();
+			DatabaseVM = new DatabaseViewModel();
 		}
 
 		public void ExitProgram()

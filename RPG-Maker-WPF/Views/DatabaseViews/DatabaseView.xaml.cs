@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace RPG_Maker_WPF.Views
+namespace RPG_Maker_WPF.Views.DatabaseViews
 {
 	/// <summary>
 	/// Interaction logic for DatabaseView.xaml

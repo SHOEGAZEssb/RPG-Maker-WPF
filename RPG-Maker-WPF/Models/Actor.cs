@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Represents a (theoretically) playable character.
 	/// </summary>
-	class Actor
+	public class Actor
 	{
 		#region Properties
 
@@ -16,6 +16,16 @@
 		  set { _name = value; }
 		}
 		private string _name;
+
+		/// <summary>
+		/// The second name of this actor.
+		/// </summary>
+		public string SecondName
+		{
+			get { return _secondName; }
+			set { _secondName = value; }
+		}
+		private string _secondName;
 
 		public string Description
 		{

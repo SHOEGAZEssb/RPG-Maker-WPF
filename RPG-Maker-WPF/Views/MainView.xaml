@@ -52,6 +52,15 @@
           </i:Interaction.Triggers>
         </MenuItem>
       </MenuItem>
+      <MenuItem Header="Tools">
+        <MenuItem Header="Database Editor" DataContext="{Binding DatabaseVM}">
+          <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+              <cal:ActionMessage MethodName="ShowDatabaseDialog"/>
+            </i:EventTrigger>
+          </i:Interaction.Triggers>
+        </MenuItem>
+      </MenuItem>
     </Menu>
   </Grid>
 </Window>

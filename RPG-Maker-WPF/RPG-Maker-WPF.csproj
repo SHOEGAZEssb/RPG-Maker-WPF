@@ -72,7 +72,10 @@
     <Compile Include="ViewModels\DatabaseViewModel.cs" />
     <Compile Include="ViewModels\NewProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="Views\DatabaseView.xaml.cs">
+    <Compile Include="Views\DatabaseViews\ActorView.xaml.cs">
+      <DependentUpon>ActorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DatabaseViews\DatabaseView.xaml.cs">
       <DependentUpon>DatabaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MapEditorView.xaml.cs">
@@ -84,7 +87,11 @@
     <Compile Include="Views\TileSetSelectorView.xaml.cs">
       <DependentUpon>TileSetSelectorView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\DatabaseView.xaml">
+    <Page Include="Views\DatabaseViews\ActorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DatabaseViews\DatabaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
