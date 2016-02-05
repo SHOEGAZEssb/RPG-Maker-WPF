@@ -3,14 +3,59 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cal="http://www.caliburnproject.org"
         xmlns:local="clr-namespace:RPG_Maker_WPF.Views.DatabaseViews"
         mc:Ignorable="d"
-        Title="DatabaseView" Height="500" Width="600">
+        Title="DatabaseView" Height="600" Width="610">
   <Grid>
-    <TabControl>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="5"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="5"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="5"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="5"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="5"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="5"/>
+    </Grid.ColumnDefinitions>
+
+    <TabControl Grid.Row="1" Grid.ColumnSpan="7">
       <TabItem Header="Actors">
         <local:ActorView />
       </TabItem>
     </TabControl>
+
+    <Button Grid.Row="3" Grid.Column="1" Content="OK">
+      <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Click">
+          <cal:ActionMessage MethodName="SaveAndClose">
+            <cal:Parameter Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+          </cal:ActionMessage>
+        </i:EventTrigger>
+      </i:Interaction.Triggers>
+    </Button>
+    <Button Grid.Row="3" Grid.Column="3" Content="Cancel">
+      <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Click">
+          <cal:ActionMessage MethodName="Close">
+            <cal:Parameter Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+          </cal:ActionMessage>
+        </i:EventTrigger>
+      </i:Interaction.Triggers>
+    </Button>
+    <Button Grid.Row="3" Grid.Column="5" Content="Apply">
+      <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Click">
+          <cal:ActionMessage MethodName="Apply"/>
+        </i:EventTrigger>
+      </i:Interaction.Triggers>
+    </Button>
   </Grid>
 </Window>

@@ -1,7 +1,6 @@
 ﻿using RPG_Maker_WPF.ViewModels;
-using System.Collections.Generic;
-using System.Xml.Serialization;
 using Polenter.Serialization;
+using System.Collections.ObjectModel;
 
 namespace RPG_Maker_WPF.Models
 {
@@ -12,12 +11,12 @@ namespace RPG_Maker_WPF.Models
 	{
 		#region Properties
 
-		public List<Actor> Actors
+		public ObservableCollection<Actor> Actors
 		{
 			get { return _actors; }
 			private set { _actors = value; }
 		}
-		private List<Actor> _actors;
+		private ObservableCollection<Actor> _actors;
 
 		#endregion properties
 
@@ -26,7 +25,7 @@ namespace RPG_Maker_WPF.Models
 		/// </summary>
 		public Database()
 		{
-			Actors = new List<Actor>();
+			Actors = new ObservableCollection<Actor>();
 		}
 
 		/// <summary>
@@ -36,7 +35,7 @@ namespace RPG_Maker_WPF.Models
 		{
 			SharpSerializer serializer = new SharpSerializer();
 			string path = ProjectViewModel.CurrentProject.Path + "\\Data\\ActorData.rpgwpfd";
-			Actors = (List<Actor>)serializer.Deserialize(path);
+			Actors = (ObservableCollection<Actor>)serializer.Deserialize(path);
 		}
 
 		/// <summary>

@@ -3,23 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:RPG_Maker_WPF.Views.DatabaseViews"
+             xmlns:converters="clr-namespace:RPG_Maker_WPF.Converters"
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="600">
+             Height="500" Width="600">
+
+  <UserControl.Resources>
+    <converters:CollectionItemToIndexConverter x:Key="collectionItemToIndexConverter"/>
+  </UserControl.Resources>
+  
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="0.25*"/>
       <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-      <RowDefinition Height="5"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
+      <RowDefinition Height="5"/>
+      <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Actors}" SelectedItem="{Binding SelectedActor}"/>
+    <ListBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding ProjectDatabase.Actors}" SelectedItem="{Binding SelectedActor}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource collectionItemToIndexConverter}}"/>
+            <TextBlock Text="{Binding Name}"/>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
 
-    <GroupBox Header="Basic Settings" Grid.Column="1" Grid.Row="1">
+    <GroupBox Header="Basic Settings" Grid.Column="1" Grid.Row="0">
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="0.5*"/>
@@ -40,23 +58,48 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
-        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding ActorName}"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SelectedActor.Name}"/>
 
         <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" Content="Second Name:"/>
-        <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding ActorSecondName}"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding SelectedActor.SecondName}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="Class:"/>
         <ComboBox Grid.Row="4" Grid.Column="0"/>
 
         <Label Grid.Row="3" Grid.Column="2" Content="Initial Lv:"/>
-        <TextBox Grid.Row="4" Grid.Column="2"/> <!--TODO: NumericUpDown-->
+        <TextBox Grid.Row="4" Grid.Column="2"/>
+        <!--TODO: NumericUpDown-->
 
         <Label Grid.Row="3" Grid.Column="4" Content="Maximum Lv:"/>
-        <TextBox Grid.Row="4" Grid.Column="4"/> <!--TODO: NumericUpDown-->
+        <TextBox Grid.Row="4" Grid.Column="4"/>
+        <!--TODO: NumericUpDown-->
 
         <Label Grid.Row="6" Grid.Column="0" Content="Description"/>
-        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" Text="{Binding ActorDescription}"/>
+        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" Text="{Binding SelectedActor.Description}"/>
       </Grid>
     </GroupBox>
+
+    <Grid Grid.Row="3">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0.5*"/>
+        <ColumnDefinition Width="5"/>
+        <ColumnDefinition Width="0.5*"/>
+      </Grid.ColumnDefinitions>
+
+      <Button Grid.Column="0" Content="Add">
+        <i:Interaction.Triggers>
+          <i:EventTrigger EventName="Click">
+            <cal:ActionMessage MethodName="AddActor"/>
+          </i:EventTrigger>
+        </i:Interaction.Triggers>
+      </Button>
+      <Button Grid.Column="2" Content="Remove" IsEnabled="{Binding CanRemoveActor}">
+        <i:Interaction.Triggers>
+          <i:EventTrigger EventName="Click">
+            <cal:ActionMessage MethodName="RemoveActor"/>
+          </i:EventTrigger>
+        </i:Interaction.Triggers>
+      </Button>
+    </Grid>
   </Grid>
 </UserControl>

@@ -9,11 +9,6 @@ namespace RPG_Maker_WPF.ViewModels
 	{
 		#region Properties
 
-		public List<Actor> Actors
-		{
-			get { return ProjectDatabase.Actors; }
-		}
-
 		/// <summary>
 		/// Currently selected <see cref="Actor"/> in the
 		/// ListBox of the <see cref="ActorView"/>
@@ -29,34 +24,9 @@ namespace RPG_Maker_WPF.ViewModels
 		}
 		private Actor _selectedActor;
 
-		public string ActorName
+		public string SelectedActorIndex
 		{
-			get { return SelectedActor.Name; }
-			set
-			{
-				SelectedActor.Name = value;
-				NotifyOfPropertyChange(() => SelectedActor);
-			}
-		}
-
-		public string ActorSecondName
-		{
-			get { return SelectedActor.SecondName; }
-			set
-			{
-				SelectedActor.SecondName = value;
-				NotifyOfPropertyChange(() => SelectedActor);
-			}
-		}
-
-		public string ActorDescription
-		{
-			get { return SelectedActor.Description; }
-			set
-			{
-				SelectedActor.Description = value;
-				NotifyOfPropertyChange(() => SelectedActor);
-			}
+			get { return ProjectDatabase.Actors.IndexOf(SelectedActor).ToString("000") + ": "; }
 		}
 
 		#region Read-Only Properties
@@ -69,13 +39,21 @@ namespace RPG_Maker_WPF.ViewModels
 			get { return ProjectViewModel.CurrentProject.Database; }
 		}
 
+		/// <summary>
+		/// Gets wether an <see cref="Actor"/> can be removed.
+		/// </summary>
+		public bool CanRemoveActor
+		{
+			get { return SelectedActor != null && ProjectDatabase.Actors.Count > 1; }
+		}
+
 		#endregion
 
 		#endregion
 
 		public DatabaseViewModel()
 		{
-			SelectedActor = Actors[0];
+			SelectedActor = ProjectDatabase.Actors[0];
 		}
 
 		public void ShowDatabaseDialog()
@@ -84,5 +62,64 @@ namespace RPG_Maker_WPF.ViewModels
 			dbv.DataContext = this;
 			dbv.ShowDialog();
 		}
+
+		/// <summary>
+		/// Saves the database data and closes the <see cref="DatabaseView"/>.
+		/// </summary>
+		/// <param name="view">The view to close.</param>
+		public void SaveAndClose(DatabaseView view)
+		{
+			ProjectDatabase.SaveData();
+			view.Close();
+		}
+
+		/// <summary>
+		/// Closes the <see cref="DatabaseView"/> without saving.
+		/// </summary>
+		/// <param name="view">The view to close.</param>
+		public void Close(DatabaseView view)
+		{
+			view.Close();
+		}
+
+		/// <summary>
+		/// Saves the database data.
+		/// </summary>
+		public void Apply()
+		{
+			ProjectDatabase.SaveData();
+		}
+
+		#region Actor
+
+		/// <summary>
+		/// Adds an <see cref="Actor"/> to the database.
+		/// </summary>
+		public void AddActor()
+		{
+			ProjectDatabase.Actors.Add(new Actor());
+			UpdateActorBindings();
+		}
+
+		/// <summary>
+		/// Removes the <see cref="SelectedActor"/> from the database.
+		/// </summary>
+		public void RemoveActor()
+		{
+			ProjectDatabase.Actors.Remove(SelectedActor);
+			UpdateActorBindings();
+		}
+
+		/// <summary>
+		/// Updates all <see cref="Actor"/> bindings.
+		/// </summary>
+		private void UpdateActorBindings()
+		{
+			NotifyOfPropertyChange(() => SelectedActor);
+			NotifyOfPropertyChange(() => SelectedActorIndex);
+			NotifyOfPropertyChange(() => CanRemoveActor);
+		}
+
+		#endregion Actor
 	}
 }
