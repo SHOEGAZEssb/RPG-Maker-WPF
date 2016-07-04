@@ -58,7 +58,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
-        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SelectedActor.Name}"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SelectedActor.Name, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" Content="Second Name:"/>
         <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding SelectedActor.SecondName}"/>
