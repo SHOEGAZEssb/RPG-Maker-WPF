@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace RPG_Maker_WPF.Models.Mapping
 {
-	/// <summary>
-	/// Represents a tile inhabiting a <see cref="MapTile"/>.
-	/// </summary>
-	public abstract class Tile
-	{
-	}
+  /// <summary>
+  /// Represents a tile inhabiting a <see cref="MapTile"/>.
+  /// </summary>
+  public abstract class Tile
+  {
+  }
 }

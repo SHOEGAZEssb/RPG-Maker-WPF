@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RPG_Maker_WPF.Models.Mapping
 {
-	/// <summary>
-	/// Represents a tile using the upper slot
-	/// of a <see cref="MapTile"/>.
-	/// </summary>
-	public class UpperTile : Tile
-	{
-	}
+  /// <summary>
+  /// Represents a tile using the upper slot
+  /// of a <see cref="MapTile"/>.
+  /// </summary>
+  public class UpperTile : Tile
+  {
+  }
 }
