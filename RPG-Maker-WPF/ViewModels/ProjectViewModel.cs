@@ -50,8 +50,12 @@ namespace RPG_Maker_WPF.ViewModels
 		/// </summary>
 		public ProjectViewModel()
 		{
-			if (Properties.Settings.Default.LastOpenedProject != "" && File.Exists(Properties.Settings.Default.LastOpenedProject))
-				LoadProject(Properties.Settings.Default.LastOpenedProject);
+			try
+			{
+				if (Properties.Settings.Default.LastOpenedProject != "" && File.Exists(Properties.Settings.Default.LastOpenedProject))
+					LoadProject(Properties.Settings.Default.LastOpenedProject);
+			}
+			catch { }
 		}
 
 		/// <summary>
@@ -61,12 +65,13 @@ namespace RPG_Maker_WPF.ViewModels
 		public void ShowNewProjectDialog()
 		{
 			NewProjectView npv = new NewProjectView();
-			if (npv.ShowDialog() == true)
+			if (npv.ShowDialog().Value)
 			{
 				CloseProject();
 				NewProjectViewModel vm = npv.DataContext as NewProjectViewModel;
 				CurrentProject = new Project(vm.ProjectName, vm.FullPath);
 				CreateFolderStructure();
+				CreateProjectFile();
 			}
 		}
 
@@ -82,8 +87,13 @@ namespace RPG_Maker_WPF.ViewModels
 			// todo: create all needed data folders (maps, sounds etc...)
 			Directory.CreateDirectory(CurrentProject.Path + "\\Maps");
 			Directory.CreateDirectory(CurrentProject.Path + "\\Data");
+		}
 
-			// create project file
+		/// <summary>
+		/// Creates the project file.
+		/// </summary>
+		private void CreateProjectFile()
+		{
 			SharpSerializer serializer = new SharpSerializer();
 			string path = CurrentProject.Path + "\\" + CurrentProject.Name + Statics.PROJECTFILEEXTENSION;
 			serializer.Serialize(CurrentProject, path);
@@ -101,6 +111,7 @@ namespace RPG_Maker_WPF.ViewModels
 			CurrentProject.Database.LoadData();
 			Properties.Settings.Default.LastOpenedProject = path;
 			Properties.Settings.Default.Save();
+			NotifyOfPropertyChange(() => CanCloseProject);
 		}
 
 		/// <summary>
@@ -111,7 +122,7 @@ namespace RPG_Maker_WPF.ViewModels
 		{
 			OpenFileDialog dlg = new OpenFileDialog();
 			dlg.Filter = "RPG Maker WPF Project Files (*" + Statics.PROJECTFILEEXTENSION + "|*" + Statics.PROJECTFILEEXTENSION;
-			if(dlg.ShowDialog() == DialogResult.OK)
+			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				CloseProject();
 				LoadProject(dlg.FileName);
@@ -128,6 +139,8 @@ namespace RPG_Maker_WPF.ViewModels
 				// todo: check if dirty and save
 				CurrentProject = null;
 			}
+
+			NotifyOfPropertyChange(() => CanCloseProject);
 		}
 	}
 }
