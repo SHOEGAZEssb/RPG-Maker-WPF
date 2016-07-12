@@ -129,9 +129,12 @@ namespace RPG_Maker_WPF.ViewModels
       }
     }
 
+    /// <summary>
+    /// Saves the project changes.
+    /// </summary>
     public void SaveProject()
     {
-      throw new NotImplementedException();
+      CurrentProject.Database.SaveData();
     }
 
     /// <summary>
@@ -143,7 +146,7 @@ namespace RPG_Maker_WPF.ViewModels
       {
         if(CurrentProject.IsDirty)
         {
-          DialogResult res = MessageBox.Show("Changes ave been made to the project. Save before closing the project?", "Save project?", MessageBoxButtons.YesNoCancel);
+          DialogResult res = MessageBox.Show("Changes have been made to the project. Save before closing the project?", "Save project?", MessageBoxButtons.YesNoCancel);
           if (res == DialogResult.Yes)
             SaveProject();
           else if (res == DialogResult.Cancel)

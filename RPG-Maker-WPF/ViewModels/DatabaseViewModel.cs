@@ -10,24 +10,29 @@ namespace RPG_Maker_WPF.ViewModels
     #region Properties
 
     /// <summary>
-    /// Currently selected <see cref="Actor"/> in the
-    /// ListBox of the <see cref="ActorView"/>
+    /// Temp database used to revert changes.
     /// </summary>
-    public Actor SelectedActor
+    public Database TempDatabase
     {
-      get { return _selectedActor; }
-      set
+      get { return _tempDatabase; }
+      private set
       {
-        _selectedActor = value;
-        NotifyOfPropertyChange(() => SelectedActor);
+        _tempDatabase = value;
+        NotifyOfPropertyChange(() => TempDatabase);
       }
     }
-    private Actor _selectedActor;
+    private Database _tempDatabase;
 
-    public string SelectedActorIndex
+    public ActorViewViewModel ActorVM
     {
-      get { return ProjectDatabase.Actors.IndexOf(SelectedActor).ToString("000") + ": "; }
+      get { return _actorVM; }
+      private set
+      {
+        _actorVM = value;
+        NotifyOfPropertyChange(() => ActorVM);
+      }
     }
+    private ActorViewViewModel _actorVM;
 
     #region Read-Only Properties
 
@@ -39,14 +44,6 @@ namespace RPG_Maker_WPF.ViewModels
       get { return ProjectViewModel.CurrentProject?.Database; }
     }
 
-    /// <summary>
-    /// Gets wether an <see cref="Actor"/> can be removed.
-    /// </summary>
-    public bool CanRemoveActor
-    {
-      get { return SelectedActor != null && ProjectDatabase.Actors.Count > 1; }
-    }
-
     #endregion
 
     #endregion
@@ -54,6 +51,9 @@ namespace RPG_Maker_WPF.ViewModels
     public DatabaseViewModel()
     {
       //SelectedActor = ProjectDatabase.Actors[0];
+      TempDatabase = new Database();
+      TempDatabase.LoadData();
+      ActorVM = new ActorViewViewModel(this);
     }
 
     public void ShowDatabaseDialog()
@@ -69,7 +69,7 @@ namespace RPG_Maker_WPF.ViewModels
     /// <param name="view">The view to close.</param>
     public void SaveAndClose(DatabaseView view)
     {
-      ProjectDatabase.SaveData();
+      ProjectDatabase.CopyData(TempDatabase);
       view.Close();
     }
 
@@ -77,8 +77,9 @@ namespace RPG_Maker_WPF.ViewModels
     /// Closes the <see cref="DatabaseView"/> without saving.
     /// </summary>
     /// <param name="view">The view to close.</param>
-    public void Close(DatabaseView view)
+    public void Cancel(DatabaseView view)
     {
+      TempDatabase.CopyData(ProjectDatabase);
       view.Close();
     }
 
@@ -87,39 +88,7 @@ namespace RPG_Maker_WPF.ViewModels
     /// </summary>
     public void Apply()
     {
-      ProjectDatabase.SaveData();
+      ProjectDatabase.CopyData(TempDatabase);
     }
-
-    #region Actor
-
-    /// <summary>
-    /// Adds an <see cref="Actor"/> to the database.
-    /// </summary>
-    public void AddActor()
-    {
-      ProjectDatabase.Actors.Add(new Actor());
-      UpdateActorBindings();
-    }
-
-    /// <summary>
-    /// Removes the <see cref="SelectedActor"/> from the database.
-    /// </summary>
-    public void RemoveActor()
-    {
-      ProjectDatabase.Actors.Remove(SelectedActor);
-      UpdateActorBindings();
-    }
-
-    /// <summary>
-    /// Updates all <see cref="Actor"/> bindings.
-    /// </summary>
-    private void UpdateActorBindings()
-    {
-      NotifyOfPropertyChange(() => SelectedActor);
-      NotifyOfPropertyChange(() => SelectedActorIndex);
-      NotifyOfPropertyChange(() => CanRemoveActor);
-    }
-
-    #endregion Actor
   }
 }

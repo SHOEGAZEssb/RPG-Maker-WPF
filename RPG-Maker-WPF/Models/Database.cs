@@ -47,5 +47,16 @@ namespace RPG_Maker_WPF.Models
       string path = ProjectViewModel.CurrentProject.Path + "\\Data\\ActorData.rpgwpfd";
       serializer.Serialize(Actors, path);
     }
+
+    /// <summary>
+    /// Copies the data from the given <paramref name="tempDatabase"/>
+    /// to this database.
+    /// </summary>
+    /// <param name="tempDatabase"></param>
+    public void CopyData(Database tempDatabase)
+    {
+      Actors = tempDatabase.Actors;
+      // todo: copy other data
+    }
   }
 }

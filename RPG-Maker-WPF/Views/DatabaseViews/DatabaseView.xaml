@@ -28,7 +28,7 @@
 
     <TabControl Grid.Row="1" Grid.ColumnSpan="7">
       <TabItem Header="Actors">
-        <local:ActorView />
+        <local:ActorView DataContext="{Binding ActorVM}"/>
       </TabItem>
     </TabControl>
 
@@ -44,7 +44,7 @@
     <Button Grid.Row="3" Grid.Column="3" Content="Cancel">
       <i:Interaction.Triggers>
         <i:EventTrigger EventName="Click">
-          <cal:ActionMessage MethodName="Close">
+          <cal:ActionMessage MethodName="Cancel">
             <cal:Parameter Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
           </cal:ActionMessage>
         </i:EventTrigger>

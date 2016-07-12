@@ -73,6 +73,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\CollectionItemToIndexConverter.cs" />
     <Compile Include="Models\Actor.cs" />
+    <Compile Include="ViewModels\ActorViewViewModel.cs" />
     <Compile Include="ViewModels\DatabaseViewModel.cs" />
     <Compile Include="ViewModels\NewProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
