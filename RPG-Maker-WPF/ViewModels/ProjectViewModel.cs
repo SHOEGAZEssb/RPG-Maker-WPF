@@ -129,6 +129,11 @@ namespace RPG_Maker_WPF.ViewModels
       }
     }
 
+    public void SaveProject()
+    {
+      throw new NotImplementedException();
+    }
+
     /// <summary>
     /// Closes the currently opened project.
     /// </summary>
@@ -136,7 +141,16 @@ namespace RPG_Maker_WPF.ViewModels
     {
       if (CurrentProject != null)
       {
-        // todo: check if dirty and save
+        if(CurrentProject.IsDirty)
+        {
+          DialogResult res = MessageBox.Show("Changes ave been made to the project. Save before closing the project?", "Save project?", MessageBoxButtons.YesNoCancel);
+          if (res == DialogResult.Yes)
+            SaveProject();
+          else if (res == DialogResult.Cancel)
+            return;
+          // else: no: do nothing.
+        }
+
         CurrentProject = null;
       }
 
